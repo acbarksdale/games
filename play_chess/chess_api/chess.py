@@ -1,5 +1,5 @@
-from chess.board import Board
-from chess.piece import WHITE, BLACK
+from chess_api.board import Board
+from chess_api.piece import WHITE, BLACK
 
 
 class Chess(object):
