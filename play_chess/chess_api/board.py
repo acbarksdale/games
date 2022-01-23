@@ -82,8 +82,11 @@ class Board(object):
         :param square:
         :return:
         """
-        if not type(square) == tuple:
-            square = self._convert_coords_human_to_programmatic()
+        try:
+            if not type(square) == tuple:
+                square = self._convert_coords_human_to_programmatic()
 
-        return self.board[square[0]][square[1]]
+            return self.board[square[0]][square[1]]
 
+        except:
+            raise Exception("Please check the input squares are valid and within the board.")
