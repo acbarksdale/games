@@ -1,4 +1,4 @@
-from chess.piece import WHITE, Rook, BLACK, Bishop, Knight, King, Queen, Pawn
+from chess_api.piece import WHITE, Rook, BLACK, Bishop, Knight, King, Queen, Pawn
 
 
 class Board(object):
