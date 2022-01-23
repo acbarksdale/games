@@ -36,7 +36,15 @@ class Chess(object):
         # 2) the piece must be the proper move color
         # 3) the piece in the final square must be of the opposite
         #    color or be None
-        # 4a) If the piece is not a knight,
+        # 4) check that the final square is within the valid piece moves
+        #    from the initial square
+        # 5) check that there are no pieces obstructing the path from
+        #    initial square to the final square (unless it is a knight)
+        # 6) the move must not place your own king in danger
+        # 7) or the piece belongs to a special class of moves
+        #   a. King Side Castling
+        #   b. Queen Side Castling
+        #   c. En-passant
 
         piece_to_move = self.board.get_piece_at_square()
         if piece_to_move is None:
