@@ -6,7 +6,7 @@ class Chess(object):
 
     def __init__(self):
         self.board = Board()
-        self.whos_turn_it_is = WHITE
+        self.whose_turn_it_is = WHITE
 
 
     def get_board(self):
@@ -17,7 +17,7 @@ class Chess(object):
         try:
             self._is_valid_move(initial_square, final_square)
             self.board.move_piece(initial_square, final_square)
-            self._change_whos_turn_it_is()
+            self._change_whose_turn_it_is()
 
         except Exception as e:
             print(str(e))
@@ -46,11 +46,12 @@ class Chess(object):
         #   b. Queen Side Castling
         #   c. En-passant
 
-        piece_to_move = self.board.get_piece_at_square()
+        piece_to_move = self.board.get_piece_at_square(initial_square)
         if piece_to_move is None:
             raise Exception("Please select a square containing a piece.")
 
-        if piece_to_move.get_color() != self.whos_turn_it_is:
-            raise Exception("Please select a piece of the color" + str(self.whos_turn_it_is))
+        if piece_to_move.get_color() != self.whose_turn_it_is:
+            raise Exception("Please select a piece of the color" + str(self.whose_turn_it_is))
 
-
+    def _change_whose_turn_it_is(self):
+        self.whose_turn_it_is = WHITE if self.whose_turn_it_is == BLACK else WHITE

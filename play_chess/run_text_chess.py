@@ -47,7 +47,11 @@ class RunTextChess(object):
         self.chess = Chess()
 
     def run(self):
-        self.print_board()
+        #self.print_board()
+        print(self.chess.board.board)
+        self.chess.make_move("A8", "A4")
+        #self.print_board()
+        print(self.chess.board.board)
 
     def print_board(self):
         for y in range(0, 8):
