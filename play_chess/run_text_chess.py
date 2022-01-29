@@ -47,11 +47,11 @@ class RunTextChess(object):
         self.chess = Chess()
 
     def run(self):
+        self.print_board()
+        #print(self.chess.board.board)
+        # self.chess.make_move("A8", "A4")
         #self.print_board()
-        print(self.chess.board.board)
-        self.chess.make_move("A8", "A4")
-        #self.print_board()
-        print(self.chess.board.board)
+        # print(self.chess.get_board_array())
 
     def print_board(self):
         for y in range(0, 8):
@@ -63,7 +63,7 @@ class RunTextChess(object):
 
                 for x in range(0, 8):
                     for sub_x in range(0, SQUARE_WIDTH):
-                        piece = self.chess.get_board()[x][y]
+                        piece = self.chess.get_board_array()[x][y]
                         if sub_x == floor(SQUARE_WIDTH / 2) and sub_y == floor(SQUARE_HEIGHT / 2) and piece is not None:
                             print(PIECE_TYPE_TO_CHAR_MAP[piece.get_type()][piece.get_color()], end='')
                         else:
