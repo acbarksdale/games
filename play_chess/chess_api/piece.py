@@ -72,7 +72,7 @@ class Knight(Piece):
         :return:
         """
 
-        return []
+        return [(1,1)]
 
 
 
