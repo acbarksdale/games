@@ -105,27 +105,27 @@ class Chess(object):
         #   b. Queen Side Castling
         #   c. En-passant - keep track of how many times the pawn has moved since last move
 
-        piece_to_move = self.board.get_piece_at_square(initial_square)
+        piece_to_move = self.board.get_piece_at_coordinates(initial_square)
         #Condition 1)
         if piece_to_move is None:
             raise NonePieceException()
-
+        print("Passed none piece")
         #Condition 2)
         if piece_to_move.get_color() != self.whose_turn_it_is:
             raise WrongColorPieceException()
-
-        move_displacement_vector = [ord(final_square[0]) - ord(initial_square[0]),
-                                    ord(final_square[1]) - ord(initial_square[1])]
-        #Condition 3)
-        if not move_displacement_vector in valid_base_moves[self.whose_turn_it_is][piece_to_move.get_type()]:
+        print("Passed correct color")
+        if not final_square in piece_to_move.get_valid_target_coordinates(initial_square):
             raise InvalidMoveForPieceException()
-
+        print("Passed in valid moves")
         #Condition 4)
-        piece_to_take = self.board.get_piece_at_square(final_square)
+        piece_to_take = self.board.get_piece_at_coordinates(final_square)
         if not piece_to_take is None and piece_to_take.get_color() == self.whose_turn_it_is:
             raise WrongColorPieceException()
-
+        print("target is correct color")
 
 
     def _change_whose_turn_it_is(self):
-        self.whose_turn_it_is = WHITE if self.whose_turn_it_is == BLACK else WHITE
+        self.whose_turn_it_is = WHITE if self.whose_turn_it_is == BLACK else BLACK
+
+    def get_whose_turn_it_is(self):
+        return self.whose_turn_it_is

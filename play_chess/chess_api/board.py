@@ -41,7 +41,7 @@ class Board(object):
         """
 
         #grab the piece from the board
-        piece = self.board_array[initial_square[0]][initial_square[1]] = piece
+        piece = self.board_array[initial_square[0]][initial_square[1]]
         self.board_array[initial_square[0]][initial_square[1]] = None
 
         #place the piece on the new square

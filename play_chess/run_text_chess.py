@@ -47,13 +47,28 @@ class RunTextChess(object):
         self.chess = Chess()
 
     def run(self):
-        self.print_board()
+        
         while True:
-            selected_coordinates = input('print some coordinates!')
-            x = selected_coordinates[0]
-            y = selected_coordinates[1]
-            valid_moves = self.chess.get_valid_moves(self._convert_coords_human_to_programmatic((x, y)))
-            self.print_board(valid_moves=valid_moves)
+            self.print_board()
+            # selected_coordinates = input('print some coordinates!')
+            # x = selected_coordinates[0]
+            # y = selected_coordinates[1]
+            # valid_moves = self.chess.get_valid_moves(self._convert_coords_human_to_programmatic((x, y)))
+            # self.print_board(valid_moves=valid_moves)
+            print("Welcome to chess. Follow the prompts, or enter Q to quit")
+            print(self.chess.get_whose_turn_it_is().upper() + "'s turn!")
+            source_coords = input('Enter source coordinates (Ex. E2): ')
+            if source_coords == 'Q': 
+                break
+            target_coords = input('Enter target square (Ex. E2): ')
+            if target_coords == 'Q':
+                break
+
+            self.chess.make_move(self._convert_coords_human_to_programmatic(source_coords),
+                                 self._convert_coords_human_to_programmatic(target_coords))
+                                  
+
+
 
     def _convert_coords_human_to_programmatic(self, human_coords):
         """
@@ -63,7 +78,8 @@ class RunTextChess(object):
         # subtract 1 from y_coord because chess boards 1 indexed
         # while our internal data structure is 0 indexed
         y_coord = 8 - int(human_coords[1])
-
+        print(x_coord)
+        print(y_coord)
         return x_coord, y_coord
 
     def print_board(self, valid_moves=None):
