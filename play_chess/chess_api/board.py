@@ -46,6 +46,16 @@ class Board(object):
         #place the piece on the new square
         self.board_array[final_square[0]][final_square[1]] = piece
 
+    def get_valid_moves_for_selected_coordinate(self, coordinate):
+
+        piece = self.board_array[coordinate[0]][coordinate[1]]
+        if piece is None:
+            raise Exception("The piece selected is NoneType.")
+
+        possible_moves = piece.get_valid_target_coordinates()
+        moves_within_board = [move for move in possible_moves if move[0] in range(8) and move[1] in range(8)]
+
+        return moves_within_board
 
 
     def get_board_array(self):
@@ -55,7 +65,7 @@ class Board(object):
     def get_piece_at_coordinates(self, coordinates):
         """
         make better docstring...
-        this function can handle booth programmatic and human coordinates
+        this function can handle both programmatic and human coordinates
         althought the intended use is with human coordinates
 
         :param square:
