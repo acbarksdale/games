@@ -48,12 +48,29 @@ class RunTextChess(object):
 
     def run(self):
         self.print_board()
-        #print(self.chess.board.board)
-        # self.chess.make_move("A8", "A4")
-        #self.print_board()
-        # print(self.chess.get_board_array())
+        while True:
+            selected_coordinates = input('print some coordinates!')
+            x = selected_coordinates[0]
+            y = selected_coordinates[1]
+            valid_moves = self.chess.get_valid_moves(self._convert_coords_human_to_programmatic((x, y)))
+            self.print_board(valid_moves=valid_moves)
 
-    def print_board(self):
+    def _convert_coords_human_to_programmatic(self, human_coords):
+        """
+
+        """
+        x_coord = ord(human_coords[0]) - ord('A')
+        # subtract 1 from y_coord because chess boards 1 indexed
+        # while our internal data structure is 0 indexed
+        y_coord = int(human_coords[1]) - 1
+
+        return x_coord, y_coord
+
+    def print_board(self, valid_moves=None):
+
+        if valid_moves == None:
+            valid_moves = []
+
         for y in range(0, 8):
             for sub_y in range(0, SQUARE_HEIGHT):
                 if sub_y == floor(SQUARE_HEIGHT / 2):
@@ -68,16 +85,21 @@ class RunTextChess(object):
                             print(PIECE_TYPE_TO_CHAR_MAP[piece.get_type()][piece.get_color()], end='')
                         else:
                             if (x + y) % 2 == 1:
-                                print(LIGHT_CHAR, end='')
+                                perimeter_char = LIGHT_CHAR
                             else:
-                                print(DARK_CHAR, end='')
+                                perimeter_char = DARK_CHAR
+
+                            if (x, y) in valid_moves:
+                                perimeter_char = ' '
+
+                            print(perimeter_char, end='')
                 print('')
 
-        print()
         x_letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
         print(' ' * floor(SQUARE_WIDTH / 2), end='  ')
         for i in range(0, 8):
             print(x_letters[i], end=' ' * (SQUARE_WIDTH - 1))
+        print('')
 
 
 if __name__ == '__main__':
