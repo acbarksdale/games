@@ -102,6 +102,7 @@ class Chess(object):
 
         if not move_displacement_vector in valid_base_moves[self.whose_turn_it_is][piece_to_move.get_type()]:
             raise InvalidMoveForPieceException()
+
         #Condition 3)
         piece_to_take = self.board.get_piece_at_square(final_square)
         if not piece_to_take is None and piece_to_take.get_color() == self.whose_turn_it_is:
