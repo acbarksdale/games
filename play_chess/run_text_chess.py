@@ -70,6 +70,7 @@ class RunTextChess(object):
 
         if valid_moves == None:
             valid_moves = []
+        print('  ' + '-' * (SQUARE_WIDTH * 8 + 24))
 
         for y in range(0, 8):
             for sub_y in range(0, SQUARE_HEIGHT):
@@ -79,6 +80,7 @@ class RunTextChess(object):
                     print('  ', end='')
 
                 for x in range(0, 8):
+                    print(' | ', end='')
                     for sub_x in range(0, SQUARE_WIDTH):
                         piece = self.chess.get_board_array()[x][y]
                         if sub_x == floor(SQUARE_WIDTH / 2) and sub_y == floor(SQUARE_HEIGHT / 2) and piece is not None:
@@ -93,12 +95,14 @@ class RunTextChess(object):
                                 perimeter_char = ' '
 
                             print(perimeter_char, end='')
+                        
+                print(' | ', end='')    
                 print('')
-
+            print('  ' + '-' * (SQUARE_WIDTH * 8 + 24))
         x_letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
         print(' ' * floor(SQUARE_WIDTH / 2), end='  ')
         for i in range(0, 8):
-            print(x_letters[i], end=' ' * (SQUARE_WIDTH - 1))
+            print('   ' + x_letters[i], end=' ' * (SQUARE_WIDTH - 1))
         print('')
 
 
