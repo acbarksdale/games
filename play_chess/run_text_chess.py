@@ -62,7 +62,7 @@ class RunTextChess(object):
         x_coord = ord(human_coords[0]) - ord('A')
         # subtract 1 from y_coord because chess boards 1 indexed
         # while our internal data structure is 0 indexed
-        y_coord = int(human_coords[1]) - 1
+        y_coord = 8 - int(human_coords[1])
 
         return x_coord, y_coord
 

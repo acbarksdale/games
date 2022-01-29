@@ -32,8 +32,7 @@ class Chess(object):
         return self.get_board().get_board_array()
 
     def get_valid_moves(self, src_coordinates):
-        piece = self.get_board().get_piece_at_coordinates(src_coordinates)
-        return piece.get_valid_target_coordinates(src_coordinates)
+        return self.board.get_piece_at_coordinates(src_coordinates).get_valid_target_coordinates(src_coordinates)
 
     def make_move(self, initial_square, final_square):
 

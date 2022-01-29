@@ -1,5 +1,6 @@
 from chess_api.piece import WHITE, Rook, BLACK, Bishop, Knight, King, Queen, Pawn
 
+BOARD_SIZE = 8
 
 class Board(object):
 
@@ -7,29 +8,29 @@ class Board(object):
         self.board_array = self._init_board_array()
 
     def _init_board_array(self):
-        board_array = [[None for i in range(8)] for j in range(8)]
+        board_array = [[None for i in range(BOARD_SIZE)] for j in range(BOARD_SIZE)]
 
-        board_array[0][0] = Rook(BLACK)
-        board_array[1][0] = Knight(BLACK)
-        board_array[2][0] = Bishop(BLACK)
-        board_array[3][0] = King(BLACK)
-        board_array[4][0] = Queen(BLACK)
-        board_array[5][0] = Bishop(BLACK)
-        board_array[6][0] = Knight(BLACK)
-        board_array[7][0] = Rook(BLACK)
+        board_array[0][0] = Rook(BLACK, self)
+        board_array[1][0] = Knight(BLACK, self)
+        board_array[2][0] = Bishop(BLACK, self)
+        board_array[4][0] = King(BLACK, self)
+        board_array[3][0] = Queen(BLACK, self)
+        board_array[5][0] = Bishop(BLACK, self)
+        board_array[6][0] = Knight(BLACK, self)
+        board_array[7][0] = Rook(BLACK, self)
 
-        for i in range(8):
-            board_array[i][1] = Pawn(BLACK)
-            board_array[i][6] = Pawn(WHITE)
+        for i in range(BOARD_SIZE):
+            board_array[i][1] = Pawn(BLACK, self)
+            board_array[i][6] = Pawn(WHITE, self)
 
-        board_array[0][7] = Rook(WHITE)
-        board_array[1][7] = Knight(WHITE)
-        board_array[2][7] = Bishop(WHITE)
-        board_array[3][7] = King(WHITE)
-        board_array[4][7] = Queen(WHITE)
-        board_array[5][7] = Bishop(WHITE)
-        board_array[6][7] = Knight(WHITE)
-        board_array[7][7] = Rook(WHITE)
+        board_array[0][7] = Rook(WHITE, self)
+        board_array[1][7] = Knight(WHITE, self)
+        board_array[2][7] = Bishop(WHITE, self)
+        board_array[4][7] = King(WHITE, self)
+        board_array[3][7] = Queen(WHITE, self)
+        board_array[5][7] = Bishop(WHITE, self)
+        board_array[6][7] = Knight(WHITE, self)
+        board_array[7][7] = Rook(WHITE, self)
 
         return board_array
 
@@ -45,17 +46,6 @@ class Board(object):
 
         #place the piece on the new square
         self.board_array[final_square[0]][final_square[1]] = piece
-
-    def get_valid_moves_for_selected_coordinate(self, coordinate):
-
-        piece = self.board_array[coordinate[0]][coordinate[1]]
-        if piece is None:
-            raise Exception("The piece selected is NoneType.")
-
-        possible_moves = piece.get_valid_target_coordinates()
-        moves_within_board = [move for move in possible_moves if move[0] in range(8) and move[1] in range(8)]
-
-        return moves_within_board
 
 
     def get_board_array(self):
